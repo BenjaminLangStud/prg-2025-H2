@@ -8,10 +8,12 @@ IntelliJ is installed:
 [https://www.jetbrains.com/idea/download/](https://www.jetbrains.com/idea/download/)
 
 ## Create Java Project
-
 Open IntelliJ
 
-Create New Project: File -> New -> Project  
+**Create New Project:** 
+> File → New → Project
+
+**Parameters:**  
 - Choose Java   
 - Name: JavaExample  
 - Choose a folder where project is stored  
@@ -20,10 +22,13 @@ Create New Project: File -> New -> Project
 A New Project is created
 
 ## Create your Java Code
-Open Folder in IntelliJ: src -> main -> java  
-Right Click and Select: New -> Java Class
+**Open Folder in IntelliJ:** 
+> src → main → java  
 
-Change the code to:
+**Right Click and Select:**  
+> New → Java Class
+
+**Change the code to:** 
 ```java
 public class HelloCourse {
     public static void main(String[] args) {
@@ -34,7 +39,8 @@ public class HelloCourse {
 ```
 
 ## Run your Java Class (works because it contains a main method)
-Right Click on HelloCourse and select 'Run HelloCourse.main'  
+Right Click on HelloCourse and select 
+> 'Run HelloCourse.main'  
 
 
 
