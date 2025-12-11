@@ -1,11 +1,16 @@
 # Programming SRH 2025 Winter
-Repository for Programming Module in 2025
+Repository for Programming Module in Winter 2025
+
+
+# Tools
+[https://www.jetbrains.com/idea/download/](https://www.jetbrains.com/idea/download/)
+
+[https://desktop.github.com/](https://desktop.github.com/)
 
 # Create a Hello World Project with IntelliJ
 
-## Prerequists
-IntelliJ is installed:  
-[https://www.jetbrains.com/idea/download/](https://www.jetbrains.com/idea/download/)
+
+
 
 ## Create Java Project
 Open IntelliJ
