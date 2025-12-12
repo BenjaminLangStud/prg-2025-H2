@@ -12,6 +12,6 @@ public class Circle {
 		Circle circle = new Circle();
 		circle.radius = 5; 
 		int diam = circle.calculateDiameter();
-		System.out.println(diam);
+		System.out.println("Diameter is "+diam);
 	}
 }
