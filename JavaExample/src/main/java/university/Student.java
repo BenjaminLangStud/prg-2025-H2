@@ -6,7 +6,8 @@ public class Student extends Person implements InformationPrinter{
     int age;
     ArrayList<Course> courses;
 
-    public Student(String firstName, String lastName, int age) {
+    public Student(int id, String firstName, String lastName, int age) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

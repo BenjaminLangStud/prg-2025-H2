@@ -1,6 +1,7 @@
 package university;
 
 public class Person {
+    int id;
     public String firstName;
     public String lastName;
 

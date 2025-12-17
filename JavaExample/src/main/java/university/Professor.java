@@ -12,7 +12,7 @@ public class Professor extends Person {
     }
 
 
-    public Professor(String firstName, String lastName, String officeNumber) {
+    public Professor(int id, String firstName, String lastName, String officeNumber) {
         super(firstName, lastName);
         this.officeNumber = officeNumber;
     }

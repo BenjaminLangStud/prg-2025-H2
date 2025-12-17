@@ -14,14 +14,14 @@ public class Course {
     public static void main(String[] args) {
         // runs the program
     }
-
+    int id;
     String name;
     String description;
-    Degree forDegree;
+    String forDegree;
 
 
 
-    public Course(String name, String description, Degree forDegree) {
+    public Course(int id, String name, String description, String forDegree) {
         this();
         this.name = name;
         this.description = description;
@@ -44,11 +44,11 @@ public class Course {
         this.description = description;
     }
 
-    public Degree getForDegree() {
+    public String getForDegree() {
         return forDegree;
     }
 
-    public void setForDegree(Degree forDegree) {
+    public void setForDegree(String forDegree) {
         this.forDegree = forDegree;
     }
 }

@@ -1,0 +1,51 @@
+id;name;description;forDegree
+1;Computer Science;Foundations of programming algorithms and computer systems;Bachelor
+2;Business Administration;Introduction to management accounting and organizational theory;Bachelor
+3;Mechanical Engineering;Basics of mechanics materials and manufacturing processes;Bachelor
+4;Electrical Engineering;Fundamentals of circuits electronics and signal processing;Bachelor
+5;Information Systems;Combination of business processes and information technology;Bachelor
+6;Data Science;Introduction to data analysis statistics and Python programming;Bachelor
+7;Artificial Intelligence;Basics of machine learning reasoning and intelligent systems;Bachelor
+8;Software Engineering;Methods for designing building and maintaining software systems;Bachelor
+9;Cyber Security;Principles of IT security cryptography and network protection;Bachelor
+10;Media Informatics;Intersection of computer science design and digital media;Bachelor
+11;Mathematics;Core concepts of algebra calculus and discrete mathematics;Bachelor
+12;Physics;Classical mechanics thermodynamics and basic quantum theory;Bachelor
+13;Economics;Microeconomics macroeconomics and economic policy foundations;Bachelor
+14;International Business;Global markets international trade and cross cultural management;Bachelor
+15;Digital Marketing;Online marketing analytics SEO and social media strategies;Bachelor
+16;Computer Engineering;Hardware software integration and embedded systems;Bachelor
+17;Environmental Engineering;Sustainable technologies and environmental protection methods;Bachelor
+18;Civil Engineering;Design and construction of infrastructure and buildings;Bachelor
+19;Human Computer Interaction;Design of usable interactive digital systems;Bachelor
+20;Game Development;Game design principles graphics and real time programming;Bachelor
+21;Advanced Computer Science;Advanced algorithms data structures and system design;Master
+22;Artificial Intelligence Engineering;Design and deployment of AI based systems;Master
+23;Data Engineering;Large scale data pipelines distributed systems and databases;Master
+24;Machine Learning;Statistical learning deep learning and model optimization;Master
+25;Software Architecture;Design of scalable maintainable enterprise software;Master
+26;Cyber Security Management;Strategic security governance risk and compliance;Master
+27;Business Analytics;Data driven decision making and predictive modeling;Master
+28;Digital Transformation;Managing organizational change through digital technologies;Master
+29;Robotics and Automation;Autonomous systems sensors and robotic control;Master
+30;Embedded Systems;Advanced microcontroller and real time system design;Master
+31;Cloud Computing;Distributed cloud architectures and DevOps practices;Master
+32;Information Management;Enterprise information systems and data governance;Master
+33;Financial Engineering;Quantitative finance risk modeling and derivatives;Master
+34;International Management;Advanced leadership and global strategy;Master
+35;Sustainable Engineering;Energy efficiency renewable systems and sustainability;Master
+36;Bioinformatics;Computational analysis of biological and genomic data;Master
+37;Smart Systems;IoT cyber physical systems and intelligent environments;Master
+38;Human Centered AI;Ethical and user focused AI system design;Master
+39;Enterprise Software Systems;ERP CRM and large scale business platforms;Master
+40;IT Project Management;Planning controlling and delivering complex IT projects;Master
+41;Digital Innovation;Methods for developing and scaling digital products;Master
+42;Applied Mathematics;Mathematical modeling and numerical simulation;Master
+43;Advanced Physics;Modern physics including quantum and particle theory;Master
+44;Economic Policy and Analysis;Advanced economic modeling and policy evaluation;Master
+45;Marketing Analytics;Customer analytics data driven marketing strategies;Master
+46;Supply Chain Management;Optimization of global logistics and supply networks;Master
+47;Educational Technology;Digital learning platforms and instructional design;Master
+48;Health Informatics;Information systems in healthcare and medical data analysis;Master
+49;AI and Data Ethics;Ethical legal and societal implications of AI systems;Master
+50;Digital Business Engineering;Integration of IT systems with digital business models;Master

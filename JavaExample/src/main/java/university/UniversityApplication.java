@@ -1,17 +1,66 @@
 package university;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import org.apache.commons.io.FileUtils;
+import university.utils.CSVReader;
 
 public class UniversityApplication {
-
-
-    public static void main(String[] args) {
-        Student student = new Student("John", "Doe", 20);
-        student.enrollCourse(new Course("Mathematics", "Basic Math Course", new Degree("Master")));
-        student.enrollCourse(new Course("Computer Science", "Advance Computer Science", new Degree("Master")));
-        student.printInformation();
+    private ArrayList<Student> students;
+    private ArrayList<Professor> professors;
+    private ArrayList<Course> courses;
+    public UniversityApplication() {
+        this.loadData();
     }
 
+    private void loadData() {
+        try {
+            this.students = CSVReader.readStudents("C:\\srh\\github\\prg-2025-H2\\JavaExample\\src\\main\\java\\university\\data\\students.csv");
+            this.courses = CSVReader.readCourses("C:\\srh\\github\\prg-2025-H2\\JavaExample\\src\\main\\java\\university\\data\\courses.csv");
+            this.professors = CSVReader.readProfessors("C:\\srh\\github\\prg-2025-H2\\JavaExample\\src\\main\\java\\university\\data\\professors.csv");
+        } catch (IOException e) {
+            System.out.println(("Error reading  CSV: " + e.getMessage()));
+        }
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
+
+    public ArrayList<Professor> getProfessors() {
+        return professors;
+    }
+
+    public void setProfessors(ArrayList<Professor> professors) {
+        this.professors = professors;
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }
+
+    public static void main(String[] args) {
+        UniversityApplication app = new UniversityApplication();
+        System.out.println("Students loaded: " + app.students.size());
+        System.out.println("Courses loaded: " + app.courses.size());
+        System.out.println("Professors loaded: " + app.professors.size());
+        /*
+        Student student = new Student(1,"John", "Doe", 20);
+        student.enrollCourse(new Course(0,"Mathematics", "Basic Math Course", "Master"));
+        student.enrollCourse(new Course(1, "Computer Science", "Advance Computer Science", "Master"));
+        student.printInformation();
+        */
+
+    }
+    /*
     public static void createPersons() {
         Person john = new Person();
         john.setFirstName("John");
@@ -31,21 +80,23 @@ public class UniversityApplication {
 
     public static ArrayList<Course> getCourses() {
         ArrayList<Course> courses = new ArrayList<>();
-        courses.add(new Course("Mathematics", "Basic Math Course", new Degree("Bachelor")));
-        courses.add(new Course("Computer Science", "Intro to Computer Science", new Degree("Bachelor")));
-        courses.add(new Course("Physics", "Fundamentals of Physics", new Degree("Bachelor")));
-        courses.add(new Course("Chemistry", "General Chemistry", new Degree("Bachelor")));
-        courses.add(new Course("Data Structures", "In-depth study of data structures", new Degree("Master")));
-        courses.add(new Course("Algorithms", "Algorithm design and analysis", new Degree("Master")));
-        courses.add(new Course("Philosophy", "Introduction to Philosophy", new Degree("Bachelor")));
+        courses.add(new Course(0, "Mathematics", "Basic Math Course", "Bachelor"));
+        courses.add(new Course(1,"Computer Science", "Intro to Computer Science", "Bachelor"));
+        courses.add(new Course(2,"Physics", "Fundamentals of Physics", "Bachelor"));
+        courses.add(new Course(3,"Chemistry", "General Chemistry", "Bachelor"));
+        courses.add(new Course(4,"Data Structures", "In-depth study of data structures", "Master"));
+        courses.add(new Course(5,"Algorithms", "Algorithm design and analysis", "Master"));
+        courses.add(new Course(6, "Philosophy", "Introduction to Philosophy", "Bachelor"));
         return courses;
     }
 
     public static ArrayList<Student> getStudents() {
         ArrayList<Student> students = new ArrayList<>();
-        students.add(new Student("Alice", "Smith", 22));
+        students.add(new Student(2,"Alice", "Smith", 22));
 
-        students.add(new Student("Bob", "Johnson", 24));
+        students.add(new Student(3,"Bob", "Johnson", 24));
         return students;
     }
+
+     */
 }
