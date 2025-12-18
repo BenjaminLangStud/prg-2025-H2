@@ -19,6 +19,14 @@ public class Person {
         System.out.println("Full Name: " + firstName + " " + lastName);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getFirstName() {
         return firstName;
     }

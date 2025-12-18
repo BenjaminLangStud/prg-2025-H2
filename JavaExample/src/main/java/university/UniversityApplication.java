@@ -18,6 +18,15 @@ public class UniversityApplication {
             this.students = CSVReader.readStudents("C:\\srh\\github\\prg-2025-H2\\JavaExample\\src\\main\\java\\university\\data\\students.csv");
             this.courses = CSVReader.readCourses("C:\\srh\\github\\prg-2025-H2\\JavaExample\\src\\main\\java\\university\\data\\courses.csv");
             this.professors = CSVReader.readProfessors("C:\\srh\\github\\prg-2025-H2\\JavaExample\\src\\main\\java\\university\\data\\professors.csv");
+            CSVReader.assignCoursesToStudents(students, courses, "C:\\srh\\github\\prg-2025-H2\\JavaExample\\src\\main\\java\\university\\data\\student-course-assignment.csv");
+            CSVReader.assignCoursesToProfessors(professors, courses, "C:\\srh\\github\\prg-2025-H2\\JavaExample\\src\\main\\java\\university\\data\\professor-course-assignment.csv");
+            System.out.println("Students loaded: " + this.students.size());
+            System.out.println("Courses loaded: " + this.courses.size());
+            System.out.println("Professors loaded: " + this.professors.size());
+            System.out.println();
+            this.students.get(0).printInformation();
+            System.out.println();
+            this.professors.get(0).printInformation();
         } catch (IOException e) {
             System.out.println(("Error reading  CSV: " + e.getMessage()));
         }
@@ -30,6 +39,7 @@ public class UniversityApplication {
     public void setStudents(ArrayList<Student> students) {
         this.students = students;
     }
+
 
     public ArrayList<Professor> getProfessors() {
         return professors;
@@ -49,9 +59,7 @@ public class UniversityApplication {
 
     public static void main(String[] args) {
         UniversityApplication app = new UniversityApplication();
-        System.out.println("Students loaded: " + app.students.size());
-        System.out.println("Courses loaded: " + app.courses.size());
-        System.out.println("Professors loaded: " + app.professors.size());
+
         /*
         Student student = new Student(1,"John", "Doe", 20);
         student.enrollCourse(new Course(0,"Mathematics", "Basic Math Course", "Master"));

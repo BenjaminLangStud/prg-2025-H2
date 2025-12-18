@@ -15,6 +15,7 @@ public class CSVReader {
         return FileUtils.readLines(new File(filePath), "UTF-8");
     }
 
+
     public static ArrayList<Student> readStudents(String filePath) throws IOException {
         List<String> lines = readCSV(filePath);
         ArrayList<Student> students = new ArrayList<>();
@@ -66,4 +67,43 @@ public class CSVReader {
         return professors;
     }
 
+    public static void assignCoursesToStudents(ArrayList<Student> students, ArrayList<Course> courses, String filePath) throws IOException {
+        // Example logic to assign courses to students
+        List<String> lines = CSVReader.readCSV(filePath);
+        int count =0;
+        for (String line : lines) {
+            if (count > 0) {
+                String[] values = line.split(";");
+                int studentId = Integer.parseInt(values[0]);
+                int courseId = Integer.parseInt(values[1]);
+                Student student = ListUtils.findStudentById(studentId, students);
+                Course course = ListUtils.findCourseById(courseId, courses);
+                if (student != null && course != null) {
+                    student.enrollCourse(course);
+                }
+            }
+            count++;
+        }
+    }
+
+
+    public static void assignCoursesToProfessors(ArrayList<Professor> professors, ArrayList<Course> courses, String filePath) throws IOException {
+        // Example logic to assign courses to students
+        List<String> lines = CSVReader.readCSV(filePath);
+        int count =0;
+        for (String line : lines) {
+            if (count > 0) {
+                String[] values = line.split(";");
+                int profId = Integer.parseInt(values[0]);
+                int courseId = Integer.parseInt(values[1]);
+                Professor professor = ListUtils.findProfessorById(profId, professors);
+                Course course = ListUtils.findCourseById(courseId, courses);
+                if (professor != null && course != null) {
+                    System.out.println("Assigning course " + course.getName() + " to professor " + professor.firstName);
+                    professor.addCourseTeaching(course);
+                }
+            }
+            count++;
+        }
+    }
 }

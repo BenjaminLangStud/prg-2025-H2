@@ -23,9 +23,18 @@ public class Course {
 
     public Course(int id, String name, String description, String forDegree) {
         this();
+        this.id = id;
         this.name = name;
         this.description = description;
         this.forDegree = forDegree;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

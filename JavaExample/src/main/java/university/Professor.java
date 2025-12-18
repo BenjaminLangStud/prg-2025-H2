@@ -14,6 +14,7 @@ public class Professor extends Person {
 
     public Professor(int id, String firstName, String lastName, String officeNumber) {
         super(firstName, lastName);
+        this.id = id;
         this.officeNumber = officeNumber;
     }
 
@@ -24,13 +25,16 @@ public class Professor extends Person {
         coursesTeaching.add(course);
     }
 
-    public void getCoursesTeaching() {
-        if (coursesTeaching != null) {
-            for (Course course : coursesTeaching) {
-                System.out.println("Teaching Course: " + course.getName());
-            }
-        } else {
-            System.out.println("No courses assigned.");
+    public ArrayList<Course> getCoursesTeaching() {
+        return this.coursesTeaching;
+    }
+
+    public void printInformation() {
+        System.out.println("Professor Information:");
+        super.printFullName();
+        System.out.println("Office Number: " + this.officeNumber);
+        for (Course course : coursesTeaching) {
+            System.out.println("Teaching Course: " + course.getName());
         }
     }
 
