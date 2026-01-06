@@ -1,6 +1,7 @@
 package university.db;
 
 import java.sql.*;
+import java.util.ArrayList;
 import university.Course;
 import university.Professor;
 import university.Student;
@@ -26,7 +27,7 @@ public class DatabaseConnector {
         // Tabelle und Spalten gemäß uni-schema.sql (Schema uni, Tabelle course, Spalte forDegree)
         String sql = "INSERT INTO uni.course(name, description, forDegree) VALUES(?,?,?)";
         try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, course.getName());
             ps.setString(2, course.getDescription());
             ps.setString(3, course.getForDegree());
@@ -212,5 +213,197 @@ public class DatabaseConnector {
             }
         }
     }
+
+    // ---------- Assignment methods ----------
+    // Professor ↔ Course: create assignment
+    public Professor assignCourseToProfessor(int professorId, int courseId) throws Exception {
+        String sql = "INSERT INTO uni.professor_course_assignment(professorId, courseId) VALUES(?,?)";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, professorId);
+            ps.setInt(2, courseId);
+            int affected = ps.executeUpdate();
+            if (affected == 0) {
+                throw new Exception("Creating professor-course assignment failed, no rows affected.");
+            }
+            Professor p = getProfessorWithCoursesById(professorId);
+            if (p == null) throw new Exception("Professor not found after creating assignment.");
+            return p;
+        }
+    }
+
+    // Professor ↔ Course: delete assignment
+    public Professor deleteCourseFromProfessor(int professorId, int courseId) throws Exception {
+        String sql = "DELETE FROM uni.professor_course_assignment WHERE professorId = ? AND courseId = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, professorId);
+            ps.setInt(2, courseId);
+            int affected = ps.executeUpdate();
+            if (affected == 0) {
+                throw new Exception("Deleting professor-course assignment failed, no rows affected.");
+            }
+            Professor p = getProfessorWithCoursesById(professorId);
+            if (p == null) throw new Exception("Professor not found after deleting assignment.");
+            return p;
+        }
+    }
+
+    // Student ↔ Course: create assignment
+    public Student assignCourseToStudent(int studentId, int courseId) throws Exception {
+        String sql = "INSERT INTO uni.student_course_assignment(studentId, courseId) VALUES(?,?)";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, studentId);
+            ps.setInt(2, courseId);
+            int affected = ps.executeUpdate();
+            if (affected == 0) {
+                throw new Exception("Creating student-course assignment failed, no rows affected.");
+            }
+            Student s = getStudentWithCoursesById(studentId);
+            if (s == null) throw new Exception("Student not found after creating assignment.");
+            return s;
+        }
+    }
+
+    // Student ↔ Course: delete assignment
+    public Student deleteCourseFromStudent(int studentId, int courseId) throws Exception {
+        String sql = "DELETE FROM uni.student_course_assignment WHERE studentId = ? AND courseId = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, studentId);
+            ps.setInt(2, courseId);
+            int affected = ps.executeUpdate();
+            if (affected == 0) {
+                throw new Exception("Deleting student-course assignment failed, no rows affected.");
+            }
+            Student s = getStudentWithCoursesById(studentId);
+            if (s == null) throw new Exception("Student not found after deleting assignment.");
+            return s;
+        }
+    }
+
+    // ---------- Helper loaders ----------
+    private Professor getProfessorWithCoursesById(int id) throws SQLException {
+        // lade Basisdaten
+        String profSql = "SELECT id, firstName, lastName, officeNumber FROM uni.professor WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(profSql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) return null;
+                Professor p = new Professor(
+                    rs.getInt("id"),
+                    rs.getString("firstName"),
+                    rs.getString("lastName"),
+                    rs.getString("officeNumber")
+                );
+                // lade Kurse
+                String courseSql = "SELECT c.id, c.name, c.description, c.forDegree "
+                                 + "FROM uni.course c "
+                                 + "JOIN uni.professor_course_assignment a ON c.id = a.courseId "
+                                 + "WHERE a.professorId = ?";
+                try (PreparedStatement cps = conn.prepareStatement(courseSql)) {
+                    cps.setInt(1, id);
+                    try (ResultSet crs = cps.executeQuery()) {
+                        while (crs.next()) {
+                            Course c = new Course(
+                                crs.getInt("id"),
+                                crs.getString("name"),
+                                crs.getString("description"),
+                                crs.getString("forDegree")
+                            );
+                            p.addCourseTeaching(c);
+                        }
+                    }
+                }
+                return p;
+            }
+        }
+    }
+
+    private Student getStudentWithCoursesById(int id) throws SQLException {
+        // lade Basisdaten
+        String studSql = "SELECT id, firstName, lastName, age FROM uni.student WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(studSql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) return null;
+                Student s = new Student(
+                    rs.getInt("id"),
+                    rs.getString("firstName"),
+                    rs.getString("lastName"),
+                    rs.getInt("age")
+                );
+                // lade Kurse
+                String courseSql = "SELECT c.id, c.name, c.description, c.forDegree "
+                                 + "FROM uni.course c "
+                                 + "JOIN uni.student_course_assignment a ON c.id = a.courseId "
+                                 + "WHERE a.studentId = ?";
+                try (PreparedStatement cps = conn.prepareStatement(courseSql)) {
+                    cps.setInt(1, id);
+                    try (ResultSet crs = cps.executeQuery()) {
+                        while (crs.next()) {
+                            Course c = new Course(
+                                crs.getInt("id"),
+                                crs.getString("name"),
+                                crs.getString("description"),
+                                crs.getString("forDegree")
+                            );
+                            s.enrollCourse(c);
+                        }
+                    }
+                }
+                return s;
+            }
+        }
+    }
+
+    public void cleanDB() {
+        String[] tables = {
+            "uni.professor_course_assignment",
+            "uni.student_course_assignment",
+            "uni.professor",
+            "uni.student",
+            "uni.course"
+        };
+        try (Connection conn = getConnection()) {
+            for (String table : tables) {
+                String sql = "DELETE FROM " + table;
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    ps.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Example usage (adjust connection parameters as needed)
+        DatabaseConnector db = new DatabaseConnector("jdbc:postgresql://localhost:5432/prg", "postgres", "admin");
+        try {
+
+            // Insert a new course
+            Course newCourse = new Course(0, "Database Systems", "Introduction to Databases", "CS");
+            Course insertedCourse = db.insertCourse(newCourse);
+            System.out.println("Inserted Course ID: " + insertedCourse.getId());
+
+            // Insert a new professor
+            Professor newProf = new Professor(0, "John", "Doe", "Room 101");
+            Professor insertedProf = db.insertProfessor(newProf);
+            System.out.println("Inserted Professor ID: " + insertedProf.getId());
+
+            // Assign course to professor
+            Professor updatedProf = db.assignCourseToProfessor(insertedProf.getId(), insertedCourse.getId());
+            System.out.println("Professor now teaches " + updatedProf.getCoursesTeaching().size() + " courses.");
+            db.cleanDB();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
