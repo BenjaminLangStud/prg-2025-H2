@@ -86,6 +86,26 @@ public class DatabaseConnector {
         }
     }
 
+    // getCourses
+    public ArrayList<Course> getCourses() throws SQLException {
+        String sql = "SELECT id, name, description, forDegree FROM uni.course";
+        ArrayList<Course> courses = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Course course = new Course(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("description"),
+                    rs.getString("forDegree")
+                );
+                courses.add(course);
+            }
+        }
+        return courses;
+    }
+
     // ---------- Professor ----------
     public Professor insertProfessor(Professor professor) throws Exception {
         // Tabelle uni.professor, Spalten firstName, lastName, officeNumber
@@ -128,6 +148,26 @@ public class DatabaseConnector {
             if (updated == null) throw new Exception("Updated professor not found after update.");
             return updated;
         }
+    }
+
+    // get professors
+    public ArrayList<Professor> getProfessors() throws SQLException {
+        String sql = "SELECT id, firstName, lastName, officeNumber FROM uni.professor";
+        ArrayList<Professor> professors = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Professor professor = new Professor(
+                    rs.getInt("id"),
+                    rs.getString("firstName"),
+                    rs.getString("lastName"),
+                    rs.getString("officeNumber")
+                );
+                professors.add(professor);
+            }
+        }
+        return professors;
     }
 
     private Professor getProfessorById(int id) throws SQLException {
@@ -194,7 +234,26 @@ public class DatabaseConnector {
         }
     }
 
-    private Student getStudentById(int id) throws SQLException {
+    public ArrayList<Student> getStudents() throws SQLException {
+        String sql = "SELECT id, firstName, lastName, age FROM uni.student";
+        ArrayList<Student> students = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Student student = new Student(
+                    rs.getInt("id"),
+                    rs.getString("firstName"),
+                    rs.getString("lastName"),
+                    rs.getInt("age")
+                );
+                students.add(student);
+            }
+        }
+        return students;
+    }
+
+    public Student getStudentById(int id) throws SQLException {
         String sql = "SELECT id, firstName, lastName, age FROM uni.student WHERE id = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
