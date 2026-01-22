@@ -86,6 +86,7 @@ public class UniversityApplication {
     public static void main(String[] args) {
         DatabaseConnector dbc = new DatabaseConnector("jdbc:postgresql://localhost:5432/prg", "postgres", "admin");
         dbc.cleanDB();
+
         UniversityApplication app = new UniversityApplication();
         // now data is loaded
         app.loadData();
@@ -94,6 +95,8 @@ public class UniversityApplication {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
     }
 
 }
