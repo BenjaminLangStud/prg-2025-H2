@@ -37,9 +37,10 @@ public class Game {
         }
         return numberOfDigitsFound != totalNumberOfDigits;
     }
-    
-    // java coding style: constants (finals) are written all upper case 
-    private static final int STANDARD_NUMBER_OF_DIGITS = 4; // INFO, a magic number
+
+    // no longer needed, it's now "difficultyLevel"
+    // // java coding style: constants (finals) are written all upper case 
+    // private static final int STANDARD_NUMBER_OF_DIGITS = 4; // INFO, a magic number
 
     // info: 
     // STANDARD_NUMBER_OF_DIGITS is called Snake case
@@ -48,8 +49,14 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Let's play a game!");
 
+        int difficultyLevel;
+        do {
+            System.out.print("Please enter your difficulty level (3-7): ");
+            difficultyLevel = scanner.nextInt();
+        } while (difficultyLevel < 3 || difficultyLevel > 7);
+
         int numberOfAttempts = 0;
-        int secretNumber = generateSecretNumber(STANDARD_NUMBER_OF_DIGITS);
+        int secretNumber = generateSecretNumber(difficultyLevel);
 
         while (true) {
             System.out.print("Please enter your guess: ");
@@ -70,7 +77,7 @@ public class Game {
                 // do {
                 //     secretNumber = (int) (Math.random() * 9000) + 1000;
                 // } while ( areDoubleDigitsPresent(secretNumber) );
-                secretNumber = generateSecretNumber(STANDARD_NUMBER_OF_DIGITS);
+                secretNumber = generateSecretNumber(difficultyLevel);
             }
 
             numberOfAttempts++;
@@ -93,8 +100,14 @@ public class Game {
 
     private static int generateSecretNumber(int totalNumberOfDigits) {
         int secretNumber;
+        int randomSpace = (int)Math.pow(10, totalNumberOfDigits);
+        int randomStartvalue = (int)Math.pow(10, totalNumberOfDigits - 1);
         do {
-            secretNumber = (int) (Math.random() * 9000) + 1000;
+            // totalNumberOfDigits = 4
+            // randomSpace = 10^4 => 10000
+            // randomStartvalue = 10^3 = 1000
+            // secretNumber = (int) (Math.random() * 9000) + 1000;
+            secretNumber = (int) (Math.random() * (randomSpace - randomStartvalue)) + randomStartvalue;
         } while ( areDoubleDigitsPresent(secretNumber, totalNumberOfDigits) );
         return secretNumber;
     }
