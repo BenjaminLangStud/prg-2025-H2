@@ -102,6 +102,7 @@ public class DatabaseConnector {
                 );
                 courses.add(course);
             }
+            conn.close();
         }
         return courses;
     }
@@ -348,8 +349,8 @@ public class DatabaseConnector {
         String profSql = "SELECT id, firstName, lastName, officeNumber FROM uni.professor WHERE id = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(profSql)) {
-            ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
+             ps.setInt(1, id);
+             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) return null;
                 Professor p = new Professor(
                     rs.getInt("id"),
