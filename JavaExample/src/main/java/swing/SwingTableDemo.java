@@ -59,10 +59,13 @@ public class SwingTableDemo {
    private void showTableDemo(){
       headerLabel.setText("Control in action: JTable"); 
 
-      String[] columnNames = {"Name", "Salary"};
+      String[] columnNames = {"Name", "Salary", "Age"};
       Object[][] data = {
-         {"Ramesh Raman", 5000},
-         {"Shabbir Hussein", 7000}
+         {"Ramesh Raman", 5000, 20},
+         {"Shabbir Hussein", 7000, 25},
+         {"John K Abraham", 6000, 23},
+         {"Rahul Singh", 6500, 27},
+         {"Varun Katiyar", 7200, 22}
       };
       JTable table = new JTable(data, columnNames);
       JScrollPane scrollPane = new JScrollPane(table);
