@@ -14,14 +14,15 @@ public class IndexExample {
 			e.printStackTrace();
 			System.out.println("The size of the array is: "+array.length);
 			test = array[array.length-1];
-		} 
+		}
+        catch (ArithmeticException e) {
+            System.out.println("calculation not working");
+        }
 		finally {
 			// DB close connection
 			System.out.println("Finally we clean up the connections, etc...");
 		}
 		System.out.println("normal coding continues here");
-		
-		
-		System.out.println("Test:"+test);
+		System.out.println("Test:" + test);
 	}
 }

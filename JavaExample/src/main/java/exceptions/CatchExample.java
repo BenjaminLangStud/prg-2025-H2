@@ -8,20 +8,17 @@ public class CatchExample {
 		int result = -1;
 				
 		try {
-			result = a/b;
+			result = a / b;
 			System.out.println("Result is "+ result);
 	
-		} catch (ArithmeticException e) {
+		} catch (Exception e) {
 			System.out.println("Catch is only executed, if an exception has occured");
+            System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		finally {
-			if (result == -1) {
-				result = 0;
-			}
 			System.out.println("Finally is always executed");
 		}
-		
 		System.out.println(result);
 	}
 }

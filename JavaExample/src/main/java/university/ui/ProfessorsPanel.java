@@ -12,8 +12,8 @@ import java.util.List;
 
 public class ProfessorsPanel extends UniDataPanel {
     private JList<String> list;
-    private final List<Professor> professors;
-    private final DatabaseConnector dbc; // may be null
+    private List<Professor> professors;
+    private DatabaseConnector dbc; // may be null
 
     public ProfessorsPanel(List<Professor> professors, DatabaseConnector dbc) {
         super("Professors");
