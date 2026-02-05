@@ -4,8 +4,8 @@
 package basic;
 
 class Point {
-	float x;
-	float y;
+    private float x;
+    private float y;
 	
 	public void set(float x, float y) { 
 		this.x = x;

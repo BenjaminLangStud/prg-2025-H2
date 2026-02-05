@@ -2,8 +2,8 @@ package basic;
 
 public class DataTypeExamples {
 
-	
-	String s = "Hello";	
+
+    private String s = "Hello";
 	public static void main(String[] args) {
         int i = 5;
         int j = 15;

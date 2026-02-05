@@ -1,8 +1,8 @@
 package basic;
 
 public class Circle {
-	int radius; // Attributes
-	String name;
+    private int radius; // Attributes
+    private String name;
 
 	int calculateDiameter() { // Method
 		return radius * 2;

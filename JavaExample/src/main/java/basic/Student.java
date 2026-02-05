@@ -6,10 +6,10 @@ import java.util.ArrayList;
  * Minimal documentation focused on structure and runtime behaviour.
  */
 public class Student {
-    String firstName;
-    String lastName;
-    int age;
-    ArrayList<String> courses;
+    private String firstName;
+    private String lastName;
+    private int age;
+    private ArrayList<String> courses;
 
     public Student() {
         // initialize with default values

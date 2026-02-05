@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class FileSystemWalker {
-    ArrayList<String> entries = new ArrayList<String>();
+    private ArrayList<String> entries = new ArrayList<String>();
 
     // for ease of use the main function is in the calls
 	public static void main(String args[]) {
